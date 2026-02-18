@@ -1,4 +1,4 @@
-# Claude Agent SDK + LiteLLM Bridge
+# Claude Code Agent SDK + LiteLLM Bridge
 
 This repo shows how to run the Claude Agent SDK against Azure OpenAI (and optionally Gemini) adapters that are fronted by a single LiteLLM proxy. The SDK talks to LiteLLM through Anthropic-compatible environment variables, while LiteLLM fans requests out to whichever backend models you configure.
 
