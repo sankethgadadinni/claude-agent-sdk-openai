@@ -1,5 +1,5 @@
 ---
-name: email_content_generator
+name: email-content-generator
 description: Generate witty, high-energy email drafts (subject + body) tailored to a provided topic, audience, and desired comedic tone. Use for fun announcements, roasts, or lighthearted updates needing structured humor.
 ---
 
