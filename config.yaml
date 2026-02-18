@@ -1,0 +1,77 @@
+model_list:
+  # Azure OpenAI deployments
+  # model: azure/<your-deployment-name>  ← deployment name from Azure portal, NOT the model name
+  - model_name: azure-gpt-4.1
+    litellm_params:
+      model: azure/gpt-4.1
+      api_base: os.environ/AZURE_API_BASE
+      api_key: os.environ/AZURE_API_KEY
+      api_version: "2025-01-01-preview"
+
+  - model_name: azure-gpt-4o-mini
+    litellm_params:
+      model: azure/gpt-4o-mini
+      api_base: os.environ/AZURE_API_BASE
+      api_key: os.environ/AZURE_API_KEY
+      api_version: "2025-01-01-preview"
+
+    # ── Gemini (Google AI Studio) ────────────────────────────────────
+  # IMPORTANT: must use gemini/ prefix — without it LiteLLM routes
+  # to Vertex AI and demands Google Cloud credentials
+  - model_name: gemini-2.5-pro
+    litellm_params:
+      model: gemini/gemini-2.5-pro
+      api_key: os.environ/GEMINI_API_KEY
+
+  - model_name: gemini-2.5-flash
+    litellm_params:
+      model: gemini/gemini-2.5-flash
+      api_key: os.environ/GEMINI_API_KEY
+
+  # Claude name aliases — subagents spawn with these hardcoded names
+  # Map haiku (fast/small) → your mini deployment
+  - model_name: claude-haiku-4-5-20251001
+    litellm_params:
+      model: azure/gpt-4o-mini
+      api_base: os.environ/AZURE_API_BASE
+      api_key: os.environ/AZURE_API_KEY
+      api_version: "2025-01-01-preview"
+
+  # Map sonnet/opus (powerful) → your main deployment
+  - model_name: claude-sonnet-4-5-20250929
+    litellm_params:
+      model: azure/gpt-4.1
+      api_base: os.environ/AZURE_API_BASE
+      api_key: os.environ/AZURE_API_KEY
+      api_version: "2025-01-01-preview"
+
+  - model_name: claude-sonnet-4-6
+    litellm_params:
+      model: azure/gpt-4.1
+      api_base: os.environ/AZURE_API_BASE
+      api_key: os.environ/AZURE_API_KEY
+      api_version: "2025-01-01-preview"
+
+  - model_name: claude-opus-4-6
+    litellm_params:
+      model: azure/gpt-4.1
+      api_base: os.environ/AZURE_API_BASE
+      api_key: os.environ/AZURE_API_KEY
+      api_version: "2025-01-01-preview"
+
+    # ── Claude name aliases (used internally by Agent SDK subagents) ─
+  # Map haiku → fast model (mini or flash)
+  - model_name: claude-haiku-4-5-20251001
+    litellm_params:
+      model: gemini/gemini-2.5-flash   # or azure/YOUR_MINI_DEPLOYMENT_NAME
+      api_key: os.environ/GEMINI_API_KEY
+
+  # Map sonnet/opus → powerful model
+  - model_name: claude-sonnet-4-5-20250929
+    litellm_params:
+      model: gemini/gemini-2.5-pro     # or azure/YOUR_DEPLOYMENT_NAME
+      api_key: os.environ/GEMINI_API_KEY
+
+litellm_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY
+  drop_params: true
